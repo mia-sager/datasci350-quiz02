@@ -1,0 +1,25 @@
+---
+title: "Budget vs Revenue"
+author: "Mia Sager"
+
+execute:
+    echo: true
+---
+
+This page will explore the relationship between budgets and revenues for well-known box office films. Based on the scatterplot @fig-budget-revenue, we can see that there is a positive correlation between large budgets and large revenue. 
+
+```{python}
+#| echo: true
+#| label: fig-budget-revenue
+#| fig-cap: "Budgets vs. Revenues"
+import pandas as pd
+import matplotlib.pyplot as plt
+
+films = pd.read_csv("films.csv")
+
+plt.scatter(films["budget_musd"], films["revenue_musd"])
+plt.xlabel("Budget (millions of USD)")
+plt.ylabel("Revenue (millions of USD)")
+plt.title("Budget vs Revenue")
+plt.show()
+```

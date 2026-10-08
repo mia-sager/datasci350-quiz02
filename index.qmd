@@ -1,0 +1,8 @@
+---
+title: "Movies"
+---
+
+This dataset explores some of the biggest box-office hit movies in history. It includes information on the year it was released, franchise, the film's budget, the film's revenue, the length of the film, as well as its public rating on IMDB. There is further analysis on the relationship between a film's [budget and revenue](budget-revenue.qmd), a film's [runtime and rating](runtime-rating.qmd), and the revenue of the [Bond films](bond.qmd).
+
+
+For this assignment, I utilized no AI.

@@ -1,0 +1,26 @@
+---
+title: "The Bond Films"
+author: "Mia Sager"
+
+execute:
+    echo: true
+---
+
+
+```{python}
+#| label: fig-bond_revenue
+#| fig-cap: "Bond Revenue over Time"
+import pandas as pd
+import matplotlib.pyplot as plt
+
+films = pd.read_csv("films.csv")
+bond = films[films["franchise"] == "James Bond"]
+
+plt.plot(bond["year"], bond["revenue_musd"])
+plt.xlabel("Year")
+plt.ylabel("Revenue (millions of USD)")
+plt.title("Bond Films Revenue over Time")
+plt.show()
+```
+
+The first Bond year was `{python} int(bond["year"].min())` and the last Bond year was `{python} int(bond["year"].max())`.

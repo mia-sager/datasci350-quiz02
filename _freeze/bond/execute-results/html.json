@@ -1,0 +1,12 @@
+{
+  "hash": "cc3b73c229a8b090d2269c35b42182d1",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"The Bond Films\"\nauthor: \"Mia Sager\"\n\nexecute:\n    echo: true\n---\n\n::: {#cell-fig-bond_revenue .cell execution_count=1}\n``` {.python .cell-code}\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nfilms = pd.read_csv(\"films.csv\")\nbond = films[films[\"franchise\"] == \"James Bond\"]\n\nplt.plot(bond[\"year\"], bond[\"revenue_musd\"])\nplt.xlabel(\"Year\")\nplt.ylabel(\"Revenue (millions of USD)\")\nplt.title(\"Bond Films Revenue over Time\")\nplt.show()\n```\n\n::: {.cell-output .cell-output-display}\n![Bond Revenue over Time](bond_files/figure-html/fig-bond_revenue-output-1.png){#fig-bond_revenue width=602 height=449}\n:::\n:::\n\n\nThe first Bond year was 1995 and the last Bond year was 2021.\n\n",
+    "supporting": [
+      "bond_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}
