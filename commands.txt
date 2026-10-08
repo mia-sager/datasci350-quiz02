@@ -1,0 +1,274 @@
+1. 
+(base) miasager@Mias-MacBook-Pro-1846 datasci350-quiz02 % quarto create project website .
+? Title (website) › website
+Creating project at /Users/miasager/datasci350-quiz02:
+  - Created _quarto.yml
+  - Created .gitignore
+  - Created index.qmd
+  - Created about.qmd
+  - Created styles.css
+
+2. 
+(base) miasager@Mias-MacBook-Pro-1846 datasci350-quiz02 % echo "/_site/" >> .gitignore
+
+(base) miasager@Mias-MacBook-Pro-1846 datasci350-quiz02 % echo "__pycache__/" >> .giti
+gnore
+(base) miasager@Mias-MacBook-Pro-1846 datasci350-quiz02 % git add .gitignore
+(base) miasager@Mias-MacBook-Pro-1846 datasci350-quiz02 % git commit -m "Add gitignore
+"
+[main 3f4200c] Add gitignore
+ 1 file changed, 4 insertions(+)
+ create mode 100644 .gitignore
+
+3. 
+Done in the VS-code text editor for _quarto.yml file
+
+project:
+  type: website
+
+website:
+  title: "Box Office Numbers"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - about.qmd
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    css: styles.css
+    toc: true
+
+
+
+4. 
+(base) miasager@Mias-MacBook-Pro-1846 datasci350-quiz02 % rm about.qmd
+
+Done in the VS-code text editor for _quarto.yml file
+
+project:
+  type: website
+
+website:
+  title: "Box Office Numbers"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: budget-revenue.qmd
+        text: Budget and Revenue
+      - href: runtime-rating.qmd
+        text: Runtime and Ratings
+      - href: bond.qmd
+        text: The Bond Films
+
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    css: styles.css
+    toc: true
+
+
+
+5. 
+Done in the VS-code text editor for _quarto.yml file
+
+project:
+  type: website
+
+website:
+  title: "Box Office Numbers"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: budget-revenue.qmd
+        text: Budget and Revenue
+      - href: runtime-rating.qmd
+        text: Runtime and Ratings
+      - href: bond.qmd
+        text: The Bond Films
+
+
+execute:
+  freeze: auto
+
+format:
+  html:
+    theme:
+      - journal
+      - brand
+    css: styles.css
+    toc: true
+
+
+
+6. 
+Done in the VS-code text editor for index.qmd file
+---
+title: "Movies"
+---
+
+This dataset explores some of the biggest box-office hit movies in history. It includes information on the year it was released, franchise, the film's budget, the film's revenue, the length of the film, as well as its public rating on IMDB. There is further analysis on the relationship between a film's [budget and revenue](budget-revenue.qmd), a film's [runtime and rating](runtime-rating.qmd), and the revenue of the [Bond films](bond.qmd).
+
+
+For this assignment, I utilized no AI.
+
+
+7. 
+(base) miasager@Mias-MacBook-Pro-1846 datasci350-quiz02 % touch budget-revenue.qmd
+Done in the VS-code text editor for budget-revenue.qmd file
+
+---
+title: "Budget vs Revenue"
+author: "Mia Sager"
+
+execute:
+    echo: true
+---
+
+This page will explore the relationship between budgets and revenues for well-known box office films. Based on the scatterplot @fig-budget-revenue, we can see that there is a positive correlation between large budgets and large revenue. 
+
+```{python}
+#| echo: true
+#| label: fig-budget-revenue
+#| fig-cap: "Budgets vs. Revenues"
+import pandas as pd
+import matplotlib.pyplot as plt
+
+films = pd.read_csv("films.csv")
+
+plt.scatter(films["budget_musd"], films["revenue_musd"])
+plt.xlabel("Budget (millions of USD)")
+plt.ylabel("Revenue (millions of USD)")
+plt.title("Budget vs Revenue")
+plt.show()
+```
+
+8. 
+(base) miasager@Mias-MacBook-Pro-1846 datasci350-quiz02 % touch runtime-rating.qmd
+Done in the VS-code text editor for runtime-rating.qmd file
+
+---
+title: "Runtime vs Rating"
+author: "Mia Sager"
+
+execute:
+    echo: true
+---
+
+This page will explore the relationship between runtime and ratings for well-known box office films. Based on the scatterplot @fig-runtime-rating, we can see that there is a weak correlation between longer runtime and higher ratings. 
+
+```{python}
+#| label: fig-runtime-rating
+#| fig-cap: "Runtime vs. Ratings"
+import pandas as pd
+import matplotlib.pyplot as plt
+
+films = pd.read_csv("films.csv")
+
+plt.scatter(films["runtime_min"], films["imdb_rating"])
+plt.xlabel("Runtime (minutes)")
+plt.ylabel("IMDB Rating (0 to 10)")
+plt.title("Runtime vs Rating")
+plt.show()
+```
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+films = pd.read_csv("films.csv")
+
+films["decade"] = films["year"] // 10 * 10
+films.groupby("decade")["imdb_rating"].mean().round(2)
+
+```
+
+9. 
+(base) miasager@Mias-MacBook-Pro-1846 datasci350-quiz02 % touch bond.qmd
+---
+title: "The Bond Films"
+author: "Mia Sager"
+
+execute:
+    echo: true
+---
+
+
+```{python}
+#| label: fig-bond_revenue
+#| fig-cap: "Bond Revenue over Time"
+import pandas as pd
+import matplotlib.pyplot as plt
+
+films = pd.read_csv("films.csv")
+bond = films[films["franchise"] == "James Bond"]
+
+plt.plot(bond["year"], bond["revenue_musd"])
+plt.xlabel("Year")
+plt.ylabel("Revenue (millions of USD)")
+plt.title("Bond Films Revenue over Time")
+plt.show()
+```
+
+The first Bond year was `{python} int(bond["year"].min())` and the last Bond year was `{python} int(bond["year"].max())`.
+
+10. 
+(base) miasager@Mias-MacBook-Pro-1846 datasci350-quiz02 % quarto render
+[1/4] runtime-rating.qmd
+[2/4] index.qmd
+[3/4] bond.qmd
+
+Starting python3 kernel...Done
+
+Executing 'bond.quarto_ipynb'
+  Cell 1/1: 'fig-bond_revenue'...Done
+
+[4/4] budget-revenue.qmd
+
+Starting python3 kernel...Done
+
+Executing 'budget-revenue.quarto_ipynb'
+  Cell 1/1: 'fig-budget-revenue'...Done
+
+
+Output created: _site/index.html
+
+(base) miasager@Mias-MacBook-Pro-1846 datasci350-quiz02 % git add --all
+(base) miasager@Mias-MacBook-Pro-1846 datasci350-quiz02 % git commit -m "Add site page
+s and freeze"
+[main 268517f] Add site pages and freeze
+ 14 files changed, 168 insertions(+)
+ create mode 100644 _freeze/bond/execute-results/html.json
+ create mode 100644 _freeze/bond/figure-html/fig-bond_revenue-output-1.png
+ create mode 100644 _freeze/budget-revenue/execute-results/html.json
+ create mode 100644 _freeze/budget-revenue/figure-html/fig-budget-revenue-output-1.png
+ create mode 100644 _freeze/runtime-rating/execute-results/html.json
+ create mode 100644 _freeze/runtime-rating/figure-html/fig-runtime-rating-output-1.png
+ create mode 100644 _freeze/site_libs/clipboard/clipboard.min.js
+ create mode 100644 _quarto.yml
+ create mode 100644 bond.qmd
+ create mode 100644 budget-revenue.qmd
+ create mode 100644 commands.txt
+ create mode 100644 index.qmd
+ create mode 100644 runtime-rating.qmd
+ create mode 100644 styles.css
+
+ 11. 
+ (base) miasager@Mias-MacBook-Pro-1846 datasci350-quiz02 % quarto publish gh-pages
+? Publish site to https://mia-sager.github.io/datasci350-quiz02/ using gh-pages? (Y/n) › Yes
+
+12. 
+Everything looks correct
+
+13. 
+git add commands.txt
+git commit -m "Add command log"
+git push
