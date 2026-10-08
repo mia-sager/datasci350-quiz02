@@ -1,0 +1,30 @@
+[
+  {
+    "objectID": "budget-revenue.html",
+    "href": "budget-revenue.html",
+    "title": "Budget vs Revenue",
+    "section": "",
+    "text": "This page will explore the relationship between budgets and revenues for well-known box office films. Based on the scatterplot Figure 1, we can see that there is a positive correlation between large budgets and large revenue.\n\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nfilms = pd.read_csv(\"films.csv\")\n\nplt.scatter(films[\"budget_musd\"], films[\"revenue_musd\"])\nplt.xlabel(\"Budget (millions of USD)\")\nplt.ylabel(\"Revenue (millions of USD)\")\nplt.title(\"Budget vs Revenue\")\nplt.show()\n\n\n\n\n\n\n\nFigure 1: Budgets vs. Revenues"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Movies",
+    "section": "",
+    "text": "This dataset explores some of the biggest box-office hit movies in history. It includes information on the year it was released, franchise, the film’s budget, the film’s revenue, the length of the film, as well as its public rating on IMDB. There is further analysis on the relationship between a film’s budget and revenue, a film’s runtime and rating, and the revenue of the Bond films.\nFor this assignment, I utilized no AI."
+  },
+  {
+    "objectID": "runtime-rating.html",
+    "href": "runtime-rating.html",
+    "title": "Runtime vs Rating",
+    "section": "",
+    "text": "This page will explore the relationship between runtime and ratings for well-known box office films. Based on the scatterplot Figure 1, we can see that there is a weak correlation between longer runtime and higher ratings.\n\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nfilms = pd.read_csv(\"films.csv\")\n\nplt.scatter(films[\"runtime_min\"], films[\"imdb_rating\"])\nplt.xlabel(\"Runtime (minutes)\")\nplt.ylabel(\"IMDB Rating (0 to 10)\")\nplt.title(\"Runtime vs Rating\")\nplt.show()\n\n\n\n\n\n\n\nFigure 1: Runtime vs. Ratings\n\n\n\n\n\n\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nfilms = pd.read_csv(\"films.csv\")\n\nfilms[\"decade\"] = films[\"year\"] // 10 * 10\nfilms.groupby(\"decade\")[\"imdb_rating\"].mean().round(2)\n\ndecade\n1980    8.01\n1990    7.70\n2000    7.94\n2010    7.83\n2020    7.44\nName: imdb_rating, dtype: float64"
+  },
+  {
+    "objectID": "bond.html",
+    "href": "bond.html",
+    "title": "The Bond Films",
+    "section": "",
+    "text": "import pandas as pd\nimport matplotlib.pyplot as plt\n\nfilms = pd.read_csv(\"films.csv\")\nbond = films[films[\"franchise\"] == \"James Bond\"]\n\nplt.plot(bond[\"year\"], bond[\"revenue_musd\"])\nplt.xlabel(\"Year\")\nplt.ylabel(\"Revenue (millions of USD)\")\nplt.title(\"Bond Films Revenue over Time\")\nplt.show()\n\n\n\n\n\n\n\nFigure 1: Bond Revenue over Time\n\n\n\n\n\nThe first Bond year was 1995 and the last Bond year was 2021."
+  }
+]
